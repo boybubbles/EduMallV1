@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Menu } from "antd";
 import {
@@ -11,10 +13,13 @@ import {
 } from "@ant-design/icons";
 import gsap from "gsap";
 import { useHistory, useParams } from "react-router-dom";
-import { USER_LOGIN } from "../../../ulti/setting";
+import { AccessToken, USER_LOGIN } from "../../../ulti/setting";
+import { useDispatch, useSelector } from "react-redux";
+import { dangXuat } from "../../../redux/reducers/userReducer";
 function Header() {
   const { category, keyword } = useParams();
   const [offset, setOffset] = useState(0);
+  const history = useHistory();
   useEffect(() => {
     const onScroll = () => setOffset(window.scrollY);
     let header = document.querySelector(".header");
@@ -67,12 +72,17 @@ function Header() {
   ];
   return (
     <div className="header">
-      <a href="/home" className="lable">
+      <h1
+        onClick={() => {
+          history.push("/home");
+        }}
+        className="lable"
+      >
         EduMall
-      </a>
+      </h1>
       <Menu
         onClick={(e) => {
-          console.log(e);
+          history.push("/home");
         }}
         className="menuHeader"
         mode="horizontal"
@@ -97,7 +107,7 @@ export const CourseSearch = (props) => {
   const goToSearch = useCallback(() => {
     if (valueSearch.trim().length > 0) {
       history.push(
-        `/${
+        `/details/${
           props.category === undefined ? "allcourses" : props.category
         }/search/${valueSearch}`
       );
@@ -135,6 +145,7 @@ export function ModalUser() {
     }
   };
   const history = useHistory();
+  const dispatch = useDispatch();
   useEffect(() => {
     if (isActive) {
       gsap.from(".modalUser__container", {
@@ -163,15 +174,27 @@ export function ModalUser() {
               {JSON.parse(localStorage.getItem(USER_LOGIN)).hoTen}
             </div>
           </div>
-          <a href="/home/user">Trang Cá Nhân</a>
+          <span
+            onClick={(e) => {
+              setTimeout(() => history.push("/home/user"), 500);
+            }}
+          >
+            Trang Cá Nhân
+          </span>
           <hr />
-          <a href="/home/user">Cài Đặt</a>
+          <span
+            onClick={(e) => {
+              setTimeout(() => history.push("/home/user"), 500);
+            }}
+          >
+            Cài Đặt
+          </span>
           <hr />
 
           <button
-            onClick={() => {
+            onClick={async () => {
               localStorage.removeItem(USER_LOGIN);
-              history.go("/");
+              localStorage.removeItem(AccessToken);
             }}
           >
             Đăng Xuất
@@ -185,6 +208,9 @@ export function ModalUser() {
 export function Cart() {
   const [isActive, setIsActive] = useState(false);
   const history = useHistory();
+  const { thongTinGioHang } = useSelector(
+    (rootReducer) => rootReducer.cartReducer
+  );
   useEffect(() => {
     if (isActive) {
       gsap.from(".cart__container", {
@@ -210,8 +236,17 @@ export function Cart() {
       <ShoppingCartOutlined />
       {isActive && (
         <div className="cart__container">
-          <p>Giỏ hàng hiện đang trống</p>
-          <span>Hãy tiếp tục tìm kiếm thêm khoá học nhé</span>
+          {thongTinGioHang.length === 0 ? (
+            <>
+              <p>Giỏ hàng hiện đang trống</p>
+              <span>Hãy tiếp tục tìm kiếm thêm khoá học nhé</span>
+            </>
+          ) : (
+            <>
+              <p>{thongTinGioHang.length} sản phẩn trong giỏ hàng </p>
+              <span>Hãy tiếp tục tìm kiếm thêm khoá học nhé</span>
+            </>
+          )}
         </div>
       )}
     </div>

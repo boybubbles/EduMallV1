@@ -1,15 +1,19 @@
-import React from "react";
-import { Route } from "react-router-dom";
+/** @format */
+
+import React, { createContext, useState } from "react";
 import styled from "styled-components";
 import Footer from "./layout/Footer";
 import Header from "./layout/Header";
 function HomeTemplate({ Component }) {
+ 
+ 
   return (
     <>
       <HomeTemplateContainer>
-        <Header />
-        <Component />
-        <Footer />
+        
+          <Header />
+          <Component />
+          <Footer />
       </HomeTemplateContainer>
     </>
   );

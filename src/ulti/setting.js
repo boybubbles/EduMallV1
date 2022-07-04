@@ -19,7 +19,7 @@ http.interceptors.request.use(
   (config) => {
     config.headers = {
       ...config.headers,
-      Authorization: "Bearer",
+      Authorization: "Bearer ",
       TokenCybersoft: TOKEN_CYBERSOFT,
     };
     return config;

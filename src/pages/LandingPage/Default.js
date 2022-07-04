@@ -1,6 +1,9 @@
+/** @format */
+
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useHistory } from "react-router-dom";
+import { RightCircleOutlined } from "@ant-design/icons";
 //css
 import "./_Default.scss";
 import "./index.scss";
@@ -20,8 +23,9 @@ import website from "./videos/websites.mp4";
 import {
   DangKyAction,
   DangNhapAction,
+  ThongTinTaiKhoanAction,
 } from "../../redux/actions/types/QuanLyNguoiDungAction";
-import { useHistory } from "react-router-dom";
+import { validateInput } from "../../validator/validator";
 
 MouseFollower.registerGSAP(gsap);
 gsap.registerPlugin(ScrollTrigger);
@@ -191,7 +195,7 @@ const SignUp = () => {
     email: "",
   });
   const { isSuccessSignUp, errorMessage } = useSelector(
-    (rootReducer) => rootReducer.nguoiDungReducer
+    (rootReducer) => rootReducer.userReducer
   );
   const handleValidInput = (checkingValue, type) => {
     let { isValidInput, errorMessage } = validateInput(checkingValue, type);
@@ -203,47 +207,13 @@ const SignUp = () => {
       },
     });
   };
-  const validateInput = (checkingValue, type) => {
-    if (type === "soDT") {
-      const regex = /^\d{10,11}$/;
-      const checkingResult = regex.exec(checkingValue);
-      if (checkingResult !== null) {
-        return { isValidInput: true, errorMessage: "" };
-      } else {
-        return {
-          isValidInput: false,
-          errorMessage: "Số điện thoại phải có 10 - 11 chữ số.",
-        };
-      }
-    }
-    if (type === "email") {
-      const regex =
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      const checkingResult = regex.exec(checkingValue);
-      if (checkingResult !== null) {
-        return {
-          isValidInput: true,
-          errorMessage: "",
-        };
-      } else {
-        return {
-          isValidInput: false,
-          errorMessage: "Email không hợp lê",
-        };
-      }
-    }
-    if (type === "hoTen") {
-      const regex = /^[a-zA-Z ]*$/;
-      const checkingResult = regex.exec(checkingValue);
-      if (checkingResult !== null) {
-        return { isValidInput: true, errorMessage: "" };
-      } else {
-        return {
-          isValidInput: false,
-          errorMessage: "Không được có ký tự đặc biệt",
-        };
-      }
-    }
+  const handleChange = (target) => {
+    let { value, name } = target;
+    signUpValue.current[name] = value;
+  };
+  const handleBlur = (target) => {
+    let { value, name } = target;
+    handleValidInput(value, name);
   };
   useEffect(() => {
     if (isSuccessSignUp) {
@@ -271,8 +241,7 @@ const SignUp = () => {
               <div className="wrapper">
                 <input
                   onChange={({ target }) => {
-                    let { value, name } = target;
-                    signUpValue.current[name] = value;
+                    handleChange(target);
                   }}
                   className="user__name"
                   name="taiKhoan"
@@ -283,8 +252,7 @@ const SignUp = () => {
               <div className="wrapper">
                 <input
                   onChange={({ target }) => {
-                    let { value, name } = target;
-                    signUpValue.current[name] = value;
+                    handleChange(target);
                   }}
                   name="matKhau"
                   className="user__password"
@@ -295,12 +263,10 @@ const SignUp = () => {
               <div className="wrapper">
                 <input
                   onChange={({ target }) => {
-                    let { value, name } = target;
-                    signUpValue.current[name] = value;
+                    handleChange(target);
                   }}
                   onBlur={({ target }) => {
-                    let { value, name } = target;
-                    handleValidInput(value, name);
+                    handleBlur(target);
                   }}
                   name="hoTen"
                   className="ho__ten"
@@ -314,12 +280,10 @@ const SignUp = () => {
               <div className="wrapper">
                 <input
                   onChange={({ target }) => {
-                    let { value, name } = target;
-                    signUpValue.current[name] = value;
+                    handleChange(target);
                   }}
                   onBlur={({ target }) => {
-                    let { value, name } = target;
-                    handleValidInput(value, name);
+                    handleBlur(target);
                   }}
                   name="soDT"
                   className="sdt"
@@ -333,12 +297,10 @@ const SignUp = () => {
               <div className="wrapper">
                 <input
                   onChange={({ target }) => {
-                    let { value, name } = target;
-                    signUpValue.current[name] = value;
+                    handleChange(target);
                   }}
                   onBlur={({ target }) => {
-                    let { value, name } = target;
-                    handleValidInput(value, name);
+                    handleBlur(target);
                   }}
                   name="email"
                   className="email"
@@ -388,7 +350,7 @@ const SignIn = () => {
   const myRef = useRef(); // eslint-disable-next-line
   const dispatch = useDispatch();
   const { isSuccessSignIn, errorMessage } = useSelector(
-    (rootReducer) => rootReducer.nguoiDungReducer
+    (rootReducer) => rootReducer.userReducer
   );
   const history = useHistory();
   const userLogin = useRef({
@@ -456,11 +418,17 @@ const SignIn = () => {
                   userLogin.current[name] = value;
                 }}
                 name="matKhau"
-                type="text"
+                type="password"
                 placeholder="Mật Khẩu"
               />
+              <RightCircleOutlined
+                onClick={async () => {
+                  dispatch(DangNhapAction(userLogin.current));
+                }}
+              />
             </form>
-            {errorMessage ? <span>{errorMessage}</span> : null}
+
+            {errorMessage ? <i>{errorMessage}</i> : null}
           </div>
         </div>
       )}

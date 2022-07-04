@@ -1,8 +1,16 @@
+/** @format */
+
 .checkout__container {
   padding: 100px 3% 0;
   .breadcrumb {
     max-width: 90%;
     margin: auto;
+    span {
+      cursor: pointer;
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
   .order__info {
     @include flex(flex-start, flex-start, row);
@@ -27,6 +35,7 @@
             border: 1px solid #444444;
             &:nth-child(2) {
               border-radius: 0px 15px 15px 0px;
+              margin-bottom: 0;
             }
           }
           .ant-input-group-addon {

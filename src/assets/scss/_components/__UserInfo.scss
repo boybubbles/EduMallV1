@@ -12,6 +12,7 @@
     .mutil__options {
       width: 100%;
       @include flex(center, unset, row);
+      position: relative;
       gap: 25px;
       button {
         cursor: pointer;
@@ -20,6 +21,16 @@
         padding: 25px;
         font-size: large;
         font-weight: bold;
+      }
+      &::after {
+        content: "";
+        background-color: darkviolet;
+        position: absolute;
+        height: 5px;
+        width: calc(50% - 12.5px);
+        top: 100%;
+        left: calc(50% + 12.5px);
+        transition: all 0.3s ease;
       }
     }
     .pannel1 {
@@ -48,19 +59,25 @@
             border-bottom: 5px solid darkviolet;
           }
         }
-        button {
+        .ant-btn-default {
+          @include flex(center, center, row);
           border: none;
           background-color: darkviolet;
           color: white;
-          padding: 15px 35px;
+          padding: 20px 35px;
           cursor: pointer;
-          border: 35px;
           border-radius: 35px;
+          transition: all 0.3s ease;
+          &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+          }
         }
       }
     }
     .pannel2 {
-      align-self: flex-start;
+      padding-top: 25px;
+      height: 100%;
     }
   }
 }

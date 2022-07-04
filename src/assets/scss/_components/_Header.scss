@@ -131,10 +131,11 @@
         border: 1px solid rgba(0, 0, 0, 0.05);
         border-radius: 0.5px;
       }
-      a {
+      span {
         padding: 25px 0px;
         text-decoration: none !important;
         color: black;
+        cursor: pointer;
         &:hover {
           font-weight: bold;
         }

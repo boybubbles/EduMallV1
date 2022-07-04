@@ -1,12 +1,16 @@
 /** @format */
 
-import { Breadcrumb } from "antd";
-import React, { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { Breadcrumb, Button, message, Space } from "antd";
+import gsap from "gsap";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import CourseCard from "../../../components/CourseCard";
-import RowCourses from "../../../components/RowCourses";
-import { ThongTinTaiKhoanAction } from "../../../redux/actions/types/QuanLyNguoiDungAction";
-import { AccessToken, USER_LOGIN } from "../../../ulti/setting";
+import {
+  CapNhatThongTinAction,
+  ThongTinTaiKhoanAction,
+} from "../../../redux/actions/types/QuanLyNguoiDungAction";
+import { userEdit } from "../../../redux/reducers/userReducer";
+
 const courseArray = [
   {
     maKhoaHoc: "ITEC2105",
@@ -32,16 +36,18 @@ const courseArray = [
   },
 ];
 function UserInfo() {
-  const [isActive, setIsActive] = useState({
-    panel1: true,
-    panel2: false,
-  });
-  const userInfo = useRef();
   const dispatch = useDispatch();
+  const [isActive, setIsActive] = useState({
+    panel1: false,
+    panel2: true,
+  });
+
+  const { userValue, successMessage } = useSelector((rootReducer) => {
+    return rootReducer.userReducer;
+  });
   useEffect(() => {
     dispatch(ThongTinTaiKhoanAction());
   }, []);
-
   return (
     <div className="user__info__container">
       <div className="breadcrumb">
@@ -56,59 +62,31 @@ function UserInfo() {
       <h1>Trang Cá Nhân và Cài Đặt</h1>
       <div className="user__info__container__overview">
         <div className="mutil__options">
-          <MyInfo />
-          <MyCourses />
+          <button
+            onClick={() => {
+              setIsActive({
+                panel1: true,
+                panel2: false,
+              });
+            }}
+          >
+            Thông Tin cơ Bản
+          </button>
+          <button
+            onClick={() => {
+              setIsActive({
+                panel1: false,
+                panel2: true,
+              });
+            }}
+          >
+            Khóa học của tôi
+          </button>
         </div>
         {isActive.panel1 && (
-          <div className="pannel1">
-            <div className="item">
-              <h3>Họ Tên</h3>
-              <input
-                // value={userInfo.current?.hoTen}
-                name="hoTen"
-                onChange={({ target }) => {
-                  let { name, value } = target;
-                  // userInfo.current[name] = value;
-                  // console.log(userInfo);
-                }}
-                type="text"
-              />
-            </div>
-            <div className="item">
-              <h3>Số Điện Thoại</h3>
-              <input
-                // value={userInfo.soDT}
-                onChange={({ target }) => {
-                  let { name, value } = target;
-                }}
-                type="text"
-                name="soDT"
-              />
-            </div>
-
-            <div className="item">
-              <h3>Email</h3>
-              <input
-                // value={userInfo.email}
-                onChange={({ target }) => {
-                  let { name, value } = target;
-                }}
-                name="email"
-                type="email"
-              />
-            </div>
-            <div className="item">
-              <button>Đổi mật khẩu</button>
-            </div>
-          </div>
+          <Panel1 userValue={userValue} successMessage={successMessage} />
         )}
-        {isActive.panel2 && (
-          <div className="pannel2">
-            <div className="courses__list">
-              <CourseCard courseArray={courseArray} hasBought={true} />
-            </div>
-          </div>
-        )}
+        {isActive.panel2 && <Panel2 />}
       </div>
     </div>
   );
@@ -116,17 +94,83 @@ function UserInfo() {
 
 export default UserInfo;
 
-const MyInfo = () => {
+const Panel1 = ({ userValue, successMessage }) => {
+  const dispatch = useDispatch();
+  const success = () => {
+    message.success(successMessage);
+  };
+  useEffect(() => {
+    gsap.from(".pannel1", {
+      x: "-100%",
+      duration: 0.3,
+      ease: "power3.easeInOut",
+    });
+  }, []);
   return (
-    <>
-      <button>Thông Tin cơ Bản</button>
-    </>
+    <div className="pannel1">
+      <div className="item">
+        <h3>Họ Tên</h3>
+        <input
+          value={userValue.hoTen}
+          onChange={({ target }) => {
+            let { value, name } = target;
+            dispatch(userEdit({ name, value }));
+          }}
+          name="hoTen"
+        />
+      </div>
+      <div className="item">
+        <h3>Số Điện Thoại</h3>
+        <input
+          value={userValue.soDT}
+          onChange={({ target }) => {
+            let { value, name } = target;
+            dispatch(userEdit({ name, value }));
+          }}
+          name="soDt"
+        />
+      </div>
+
+      <div className="item">
+        <h3>Email</h3>
+        <input
+          value={userValue.email}
+          onChange={({ target }) => {
+            let { value, name } = target;
+            dispatch(userEdit({ name, value }));
+          }}
+          name="email"
+        />
+      </div>
+      <div className="item">
+        <Space>
+          <Button
+            onClick={async () => {
+              dispatch(CapNhatThongTinAction(userValue));
+              success();
+            }}
+          >
+            Cập Nhật Thông Tin
+          </Button>
+        </Space>
+      </div>
+    </div>
   );
 };
-const MyCourses = () => {
+const Panel2 = () => {
+  const { userValue } = useSelector((rootReducer) => rootReducer.userReducer);
+  useEffect(() => {
+    gsap.from(".pannel2", {
+      x: "200%",
+      duration: 0.3,
+      ease: "power3.easeInOut",
+    });
+  }, []);
   return (
-    <>
-      <button>Khóa học của tôi</button>
-    </>
+    <div className="pannel2">
+      <div className="courses__list">
+        <CourseCard courseArray={userValue.chiTietKhoaHocGhiDanh} hasBought={true} />
+      </div>
+    </div>
   );
 };

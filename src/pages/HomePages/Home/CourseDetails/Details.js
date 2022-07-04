@@ -4,7 +4,6 @@ import { Breadcrumb } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import gsap from "gsap";
 import {
   layDanhSachKhoaHocAction,
   layKhoaHocTheoDanhMucAction,
@@ -12,10 +11,21 @@ import {
 import { CourseSearch } from "../../../../templates/HomeTemplate/layout/Header";
 import CourseCard from "../../../../components/CourseCard";
 function Details() {
-  const dispatch = useDispatch();
   const history = useHistory();
+  const dispatch = useDispatch();
   const { category, keyword } = useParams();
+  const { courseArray, notFound } = useSelector(
+    (rootReducer) => rootReducer.courseReducer
+  );
+  const listCategory = [
+    "allcourses",
+    "BackEnd",
+    "FrontEnd",
+    "FullStack",
+    "TuDuy",
+  ];
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (keyword) {
       dispatch(layDanhSachKhoaHocAction(keyword));
     } else if (category === "allcourses") {
@@ -24,9 +34,7 @@ function Details() {
       dispatch(layKhoaHocTheoDanhMucAction(category));
     }
   }, [category, keyword]);
-  const { courseArray } = useSelector(
-    (rootReducer) => rootReducer.khoaHocReducer
-  );
+
   return (
     <div>
       <div className="container__details">
@@ -37,20 +45,22 @@ function Details() {
                 <a href="/home">Home</a>
               </Breadcrumb.Item>
 
-              <Breadcrumb.Item>{category}</Breadcrumb.Item>
+              <Breadcrumb.Item>
+                {listCategory.includes(category) ? category : "notFound"}
+              </Breadcrumb.Item>
             </Breadcrumb>
-            <h1>{category}</h1>
+            <h1>{listCategory.includes(category) ? category : "notFound"}</h1>
           </div>
         </div>
         <div className="main__details">
           <div className="topic">
             <CourseSearch category={category} valueSearch={keyword} />
             <ul>
-              <a href="/allcourses">Tất cả khóa học</a>
-              <a href="/BackEnd">Back End</a>
-              <a href="/FrontEnd">Front End</a>
-              <a href="/FullStack">Full Stack</a>
-              <a href="/TuDuy">Tư Duy</a>
+              <a href="/details/allcourses">Tất cả khóa học</a>
+              <a href="/details/BackEnd">Back End</a>
+              <a href="/details/FrontEnd">Front End</a>
+              <a href="/details/FullStack">Full Stack</a>
+              <a href="/details/TuDuy">Tư Duy</a>
             </ul>
           </div>
           <div className="content">

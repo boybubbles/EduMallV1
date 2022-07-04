@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -10,8 +10,14 @@ import banner from "../../../assets/images/banner.png";
 import banner2 from "../../../assets/images/banner2.png";
 import { useHistory } from "react-router-dom";
 import RowCourses from "../../../components/RowCourses";
+import { useDispatch } from "react-redux";
+import { ThongTinTaiKhoanAction } from "../../../redux/actions/types/QuanLyNguoiDungAction";
 
 function Home() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(ThongTinTaiKhoanAction());
+  });
   const history = useHistory();
   return (
     <div className="container">
@@ -61,7 +67,7 @@ function Home() {
           >
             <SwiperSlide
               onClick={() => {
-                history.push("/allcourses");
+                history.push("/details/allcourses");
               }}
               className="green"
             >
@@ -70,7 +76,7 @@ function Home() {
             </SwiperSlide>
             <SwiperSlide
               onClick={() => {
-                history.push("/BackEnd");
+                history.push("/details/BackEnd");
               }}
               className="pink"
             >
@@ -79,7 +85,7 @@ function Home() {
             </SwiperSlide>
             <SwiperSlide
               onClick={() => {
-                history.push("/FrontEnd");
+                history.push("/details/FrontEnd");
               }}
               className="yellow"
             >
@@ -88,7 +94,7 @@ function Home() {
             </SwiperSlide>
             <SwiperSlide
               onClick={() => {
-                history.push("/FullStack");
+                history.push("/details/FullStack");
               }}
               className="purple"
             >
@@ -97,7 +103,7 @@ function Home() {
             </SwiperSlide>
             <SwiperSlide
               onClick={() => {
-                history.push("/TuDuy");
+                history.push("/details/TuDuy");
               }}
               className="navy"
             >

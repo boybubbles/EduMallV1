@@ -1,5 +1,6 @@
 import React from "react";
 import app from "../../../assets/images/App.png";
+import "./_Footer.scss"
 function Footer() {
   return (
     <div className="footer__container">

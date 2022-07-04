@@ -1,3 +1,5 @@
+/** @format */
+
 import { baseService } from "./baseService";
 import { GROUPID } from "../ulti/setting";
 export class QuanLyKhoaHocService extends baseService {
@@ -22,6 +24,9 @@ export class QuanLyKhoaHocService extends baseService {
     return this.get(
       `/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${maKhoaDanhMuc}&MaNhom=${GROUPID}`
     );
+  };
+  ghiDanhKhoaHoc = (thongTinGhiDanh) => {
+    return this.post(`/api/QuanLyKhoaHoc/DangKyKhoaHoc`, thongTinGhiDanh);
   };
 }
 

@@ -1,3 +1,5 @@
+/** @format */
+
 .cartUser__container {
   @include flex(flex-start, flex-start, row);
   gap: 25px;
@@ -9,7 +11,9 @@
   max-width: 1280px;
   .cart__items {
     width: 50%;
-
+    .ant-breadcrumb-link {
+      cursor: pointer;
+    }
     .cartItems__container {
       overflow-y: scroll;
       height: 100%;
@@ -20,6 +24,8 @@
         @include flex(flex-start, flex-start, column);
         gap: 25px;
         width: 100%;
+        height: 50vh;
+        overflow-y: scroll;
         .item {
           gap: 15px;
           @include flex(center, flex-start, row);
