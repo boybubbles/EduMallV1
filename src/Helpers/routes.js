@@ -8,9 +8,11 @@ export function IsUserRedirect({ user, loggedInPath, children, ...rest }) {
       {...rest}
       render={() => {
         if (!user) {
+          console.log("user not found");
           return children;
         }
         if (user) {
+          console.log("user already logged in");
           return (
             <Redirect
               to={{

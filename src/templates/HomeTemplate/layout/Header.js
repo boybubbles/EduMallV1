@@ -192,9 +192,15 @@ export function ModalUser() {
           <hr />
 
           <button
-            onClick={async () => {
+            onClick={() => {
+              console.log("first")
               localStorage.removeItem(USER_LOGIN);
+              console.log("second")
               localStorage.removeItem(AccessToken);
+              console.log("third")
+              dispatch(dangXuat());
+              console.log("go")
+              history.go("/");
             }}
           >
             Đăng Xuất

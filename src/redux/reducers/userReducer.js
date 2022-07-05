@@ -62,7 +62,7 @@ const userReducer = createSlice({
       }
     },
     dangXuat: (state, action) => {
-      
+      state.isSuccessSignIn = false;
     },
   },
 });

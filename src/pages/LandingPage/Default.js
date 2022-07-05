@@ -23,13 +23,13 @@ import website from "./videos/websites.mp4";
 import {
   DangKyAction,
   DangNhapAction,
-  ThongTinTaiKhoanAction,
 } from "../../redux/actions/types/QuanLyNguoiDungAction";
 import { validateInput } from "../../validator/validator";
 
 MouseFollower.registerGSAP(gsap);
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(ScrollToPlugin);
+
 function Default() {
   const cursor = new MouseFollower({
     speed: 0.6,
@@ -43,7 +43,6 @@ function Default() {
     let paddingBranding = document.querySelector(
       ".hero-inner-link-item-branding"
     );
-
     let websiteSpan = document.querySelector(".website");
     let appSpan = document.querySelector(".app");
     let brandingSpan = document.querySelector(".branding");
@@ -57,7 +56,6 @@ function Default() {
     brandingSpan.addEventListener("mouseenter", () => {
       cursor.addState("-exclusion");
     });
-
     paddingApp.addEventListener("mouseenter", () => {
       cursor.setVideo(app);
     });
@@ -67,7 +65,6 @@ function Default() {
     paddingBranding.addEventListener("mouseenter", () => {
       cursor.setVideo(branding);
     });
-
     //remove video
     paddingApp.addEventListener("mouseleave", () => {
       cursor.removeMedia();
