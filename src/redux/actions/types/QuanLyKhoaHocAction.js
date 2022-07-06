@@ -68,3 +68,36 @@ export const loadThongTinKhoaHocAction = (maKhoaHoc) => {
     }
   };
 };
+export const xoaKhoaHocAction = (maKhoaHoc) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyKhoaHocService.xoaKhoaHoc(maKhoaHoc);
+      dispatch(layDanhSachKhoaHocAction());
+      console.log(`xóa thành công ${maKhoaHoc}`);
+    } catch (errors) {
+      alert(`${errors.response.data}`);
+    }
+  };
+};
+export const themKhoaHocUploadHinhAction = (formData) => {
+  console.log("themKhoaHocUploadHinhAction");
+  return async (dispatch) => {
+    try {
+      let result = await quanLyKhoaHocService.themKhoaHocUploadHinh(formData);
+      alert("Thêm Khóa Học Thành Công");
+    } catch (errors) {
+      console.log(errors);
+    }
+  };
+};
+export const capNhatKhoaHocUploadAction = (formData) => {
+  return async (dispatch) => {
+    try {
+      let result = await quanLyKhoaHocService.capNhatKhoaHocUpload(formData);
+      alert("Cập nhật khóa học thành công");
+      console.log("result", result);
+    } catch (errors) {
+      console.log(errors);
+    }
+  };
+};

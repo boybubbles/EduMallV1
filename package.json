@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^4.21.3",
     "axios": "^0.27.2",
+    "formik": "^2.2.9",
     "gsap": "^3.10.4",
     "history": "^5.3.0",
     "mouse-follower": "^1.1.2",

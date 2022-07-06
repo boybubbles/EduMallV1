@@ -20,7 +20,7 @@ function Home() {
   });
   const history = useHistory();
   return (
-    <div className="container">
+    <div className="home__container">
       <Swiper
         slidesPerView={1}
         navigation={{

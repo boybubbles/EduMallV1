@@ -3,10 +3,6 @@
 import { baseService } from "./baseService";
 import { GROUPID } from "../ulti/setting";
 export class QuanLyKhoaHocService extends baseService {
-  themKhoaHocUploadHinh = (formData) => {
-    return this.post(`/api/QuanLyKhoaHoc/ThemKhoaHocUploadHinh`, formData);
-  };
-
   layDanhSachKhoaHoc = (keyword) => {
     return this.get(
       keyword
@@ -27,6 +23,17 @@ export class QuanLyKhoaHocService extends baseService {
   };
   ghiDanhKhoaHoc = (thongTinGhiDanh) => {
     return this.post(`/api/QuanLyKhoaHoc/DangKyKhoaHoc`, thongTinGhiDanh);
+  };
+  xoaKhoaHoc = (maKhoaHoc) => {
+    return this.delete(`/api/QuanLyKhoaHoc/XoaKhoaHoc?MaKhoaHoc=${maKhoaHoc}`);
+  };
+  themKhoaHocUploadHinh = (formData) => {
+    console.log("call API");
+    return this.post("api/QuanLyKhoaHoc/ThemKhoaHocUploadHinh", formData);
+  };
+  capNhatKhoaHocUpload = (formData) => {
+    console.log("call API");
+    return this.post("api/QuanLyKhoaHoc/CapNhatKhoaHocUpload", formData);
   };
 }
 

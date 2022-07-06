@@ -1,9 +1,7 @@
 /** @format */
 
 import HomeTemplate from "./templates/HomeTemplate/HomeTemplate";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-// import "./assets/scss/styles.scss";
-// eslint-disable-next-line
+import { BrowserRouter, Switch } from "react-router-dom";
 import "swiper/css/bundle";
 import "./App.css";
 import Details from "./pages/HomePages/Home/CourseDetails/Details";
@@ -13,9 +11,20 @@ import Checkout from "./pages/HomePages/Checkout/Checkout";
 import Cart from "./pages/HomePages/cart/Cart";
 import Default from "./pages/LandingPage/Default";
 import { USER_LOGIN } from "./ulti/setting";
-import { IsUserRedirect, ProtectedRoute } from "./Helpers/routes";
+import {
+  IsAdminRedirect,
+  IsUserRedirect,
+  ProtectedRoute,
+} from "./Helpers/routes";
 import UserInfo from "./pages/HomePages/User/UserInfo";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import Dashboard from "./pages/AdminPages/Dashboard/Dashboard";
+import AdminTemplate from "./templates/AdminTemplate/AdminTemplate";
+import EditUser from "./pages/AdminPages/Dashboard/EditUser/EditUser";
+import AddNewUser from "./pages/AdminPages/Dashboard/AddNewUser/AddNewUser";
+import AddNew from "./pages/AdminPages/Courses/AddNew/AddNew";
+import Courses from "./pages/AdminPages/Courses/Courses";
+import Edit from "./pages/AdminPages/Courses/Edit/Edit";
 
 function App() {
   let user = JSON.parse(localStorage.getItem(USER_LOGIN));
@@ -24,6 +33,33 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
+          {/* Admin*/}
+          <IsAdminRedirect user={user} path="/admin">
+            <AdminTemplate Component={Dashboard} />
+          </IsAdminRedirect>
+          <IsAdminRedirect user={user} path="/admin/users">
+            <AdminTemplate Component={Dashboard} />
+          </IsAdminRedirect>
+          <IsAdminRedirect
+            user={user}
+            path="/admin/dashboard/edituser/:taiKhoan"
+          >
+            <AdminTemplate Component={EditUser} />
+          </IsAdminRedirect>
+          <IsAdminRedirect user={user} path="/admin/dashboard/addnewuser">
+            <AdminTemplate Component={AddNewUser} />
+          </IsAdminRedirect>
+          <IsAdminRedirect user={user} path="/admin/courses">
+            <AdminTemplate Component={Courses} />
+          </IsAdminRedirect>
+          <IsAdminRedirect user={user} path="/admin/courses/edit/:id">
+            <AdminTemplate Component={Edit} />
+          </IsAdminRedirect>
+          <IsAdminRedirect user={user} path="/admin/courses/addnew">
+            <AdminTemplate Component={AddNew} />
+          </IsAdminRedirect>
+          {/* user */}
+
           <IsUserRedirect exact path="/" loggedInPath="/home" user={user}>
             <Default />
           </IsUserRedirect>

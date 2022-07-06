@@ -36,11 +36,11 @@ function Header() {
   const items = [
     {
       label: "Trang Chủ",
-      key: "home",
+      key: "/home",
     },
     {
       label: "Khóa học của tôi",
-      key: "course",
+      key: "/home/user",
     },
     {
       icon: <UnorderedListOutlined />,
@@ -50,22 +50,22 @@ function Header() {
         {
           label: "FrontEnd",
           icon: <CodepenOutlined />,
-          children: [],
+          key: "/details/FrontEnd",
         },
         {
           label: "BackEnd",
           icon: <MessageOutlined />,
-          children: [],
+          key: "/details/BackEnd",
         },
         {
           label: "FullStack",
           icon: <AntDesignOutlined />,
-          children: [],
+          key: "/details/FullStack",
         },
         {
           label: "Tư Duy",
           icon: <CodeOutlined />,
-          children: [],
+          key: "/details/TuDuy",
         },
       ],
     },
@@ -82,7 +82,8 @@ function Header() {
       </h1>
       <Menu
         onClick={(e) => {
-          history.push("/home");
+          // history.push("/home");
+          history.push(`${e.key}`);
         }}
         className="menuHeader"
         mode="horizontal"
@@ -193,13 +194,13 @@ export function ModalUser() {
 
           <button
             onClick={() => {
-              console.log("first")
+              console.log("first");
               localStorage.removeItem(USER_LOGIN);
-              console.log("second")
+              console.log("second");
               localStorage.removeItem(AccessToken);
-              console.log("third")
+              console.log("third");
               dispatch(dangXuat());
-              console.log("go")
+              console.log("go");
               history.go("/");
             }}
           >

@@ -1,6 +1,7 @@
 /** @format */
 
 import { createSlice } from "@reduxjs/toolkit";
+import { USER_LOGIN } from "../../ulti/setting";
 
 const initialState = {
   userValue: {
@@ -13,11 +14,12 @@ const initialState = {
     maNhom: "",
     email: "",
   },
-
   errorMessage: "",
   successMessage: "Cập Nhật Thành Công",
   isSuccessSignUp: false,
   isSuccessSignIn: false,
+  updateStatus: true,
+  updateMessage: "",
 };
 
 const userReducer = createSlice({
@@ -47,16 +49,13 @@ const userReducer = createSlice({
         state.userValue = action.payload;
       }
     },
-    userEdit: (state, action) => {
-      if (action.payload.name === "soDt") {
-        state.userValue.soDT = action.payload.value;
-      } else {
-        state.userValue[action.payload.name] = action.payload.value;
-      }
-    },
+
     capNhatThongTin: (state, action) => {
+      console.log("payload", action.payload);
+      console.log("userValue", state.userValue);
       if (action.payload.status === 200) {
-        state.userValue = action.payload;
+        state.userValue = { ...state.userValue, ...action.payload };
+        localStorage.setItem(USER_LOGIN, JSON.stringify(action.payload));
       } else {
         state.successMessage = "Cập Nhật Thất Bại";
       }
@@ -67,13 +66,7 @@ const userReducer = createSlice({
   },
 });
 
-export const {
-  dangXuat,
-  userEdit,
-  DangKy,
-  DangNhap,
-  ThongTinTaiKhoan,
-  capNhatThongTin,
-} = userReducer.actions;
+export const { dangXuat, DangKy, DangNhap, ThongTinTaiKhoan, capNhatThongTin } =
+  userReducer.actions;
 
 export default userReducer.reducer;

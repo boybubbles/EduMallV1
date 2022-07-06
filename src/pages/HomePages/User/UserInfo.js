@@ -2,39 +2,14 @@
 
 import { Breadcrumb, Button, message, Space } from "antd";
 import gsap from "gsap";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CourseCard from "../../../components/CourseCard";
 import {
   CapNhatThongTinAction,
   ThongTinTaiKhoanAction,
 } from "../../../redux/actions/types/QuanLyNguoiDungAction";
-import { userEdit } from "../../../redux/reducers/userReducer";
 
-const courseArray = [
-  {
-    maKhoaHoc: "ITEC2105",
-    biDanh: "lap-trinh-huong-doi-tuong",
-    tenKhoaHoc: "Lập Trình Hướng Đối Tượng",
-    moTa: 'Lập trình hướng đối tượng là một mẫu hình lập trình dựa trên khái niệm "công nghệ đối tượng", mà trong đó, đối tượng chứa đựng các dữ liệu, trên các trường, thường được gọi là các thuộc tính; và mã nguồn, được tổ chức thành các phương thức.',
-    luotXem: 100,
-    hinhAnh:
-      "https://elearning0706.cybersoft.edu.vn/hinhanh/lap-trinh-huong-doi-tuong_gp01.png",
-    maNhom: "gp01",
-    ngayTao: "01/06/2022",
-    soLuongHocVien: 0,
-    nguoiTao: {
-      taiKhoan: "dpnguyen",
-      hoTen: "le quang anh ",
-      maLoaiNguoiDung: "GV",
-      tenLoaiNguoiDung: "Giáo vụ",
-    },
-    danhMucKhoaHoc: {
-      maDanhMucKhoahoc: "BackEnd",
-      tenDanhMucKhoaHoc: "Lập trình Backend",
-    },
-  },
-];
 function UserInfo() {
   const dispatch = useDispatch();
   const [isActive, setIsActive] = useState({
@@ -99,6 +74,16 @@ const Panel1 = ({ userValue, successMessage }) => {
   const success = () => {
     message.success(successMessage);
   };
+  const [valueEdit, setValueEdit] = useState({
+    taiKhoan: userValue.taiKhoan,
+    matKhau: userValue?.matKhau,
+    hoTen: userValue.hoTen,
+    soDT: userValue.soDT,
+    maLoaiNguoiDung: userValue.maLoaiNguoiDung,
+    maNhom: userValue.maNhom,
+    email: userValue.email,
+  });
+  console.log(valueEdit);
   useEffect(() => {
     gsap.from(".pannel1", {
       x: "-100%",
@@ -111,10 +96,10 @@ const Panel1 = ({ userValue, successMessage }) => {
       <div className="item">
         <h3>Họ Tên</h3>
         <input
-          value={userValue.hoTen}
+          value={valueEdit.hoTen}
           onChange={({ target }) => {
             let { value, name } = target;
-            dispatch(userEdit({ name, value }));
+            setValueEdit({ ...valueEdit, [name]: value });
           }}
           name="hoTen"
         />
@@ -122,22 +107,22 @@ const Panel1 = ({ userValue, successMessage }) => {
       <div className="item">
         <h3>Số Điện Thoại</h3>
         <input
-          value={userValue.soDT}
+          value={valueEdit.soDT}
           onChange={({ target }) => {
             let { value, name } = target;
-            dispatch(userEdit({ name, value }));
+            setValueEdit({ ...valueEdit, [name]: value });
           }}
-          name="soDt"
+          name="soDT"
         />
       </div>
 
       <div className="item">
         <h3>Email</h3>
         <input
-          value={userValue.email}
+          value={valueEdit.email}
           onChange={({ target }) => {
             let { value, name } = target;
-            dispatch(userEdit({ name, value }));
+            setValueEdit({ ...valueEdit, [name]: value });
           }}
           name="email"
         />
@@ -146,7 +131,7 @@ const Panel1 = ({ userValue, successMessage }) => {
         <Space>
           <Button
             onClick={async () => {
-              dispatch(CapNhatThongTinAction(userValue));
+              dispatch(CapNhatThongTinAction(valueEdit));
               success();
             }}
           >
@@ -169,7 +154,10 @@ const Panel2 = () => {
   return (
     <div className="pannel2">
       <div className="courses__list">
-        <CourseCard courseArray={userValue.chiTietKhoaHocGhiDanh} hasBought={true} />
+        <CourseCard
+          courseArray={userValue.chiTietKhoaHocGhiDanh}
+          hasBought={true}
+        />
       </div>
     </div>
   );

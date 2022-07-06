@@ -1,5 +1,7 @@
+/** @format */
+
 @import "../../scss/_base/varaiable";
-.container {
+.home__container {
   width: 100vw;
   padding: 75px 15px 0px;
   color: #313c4b !important;
@@ -93,10 +95,12 @@
     padding: 15px 0px;
     .list__courses {
       .list__courses__wrapper {
+        .row {
+          padding: 0px 15px;
+        }
         * ~ * {
           margin-bottom: 25px;
         }
-       
       }
     }
   }

@@ -51,7 +51,6 @@ const courseReducer = createSlice({
     },
     ghiDanhKhoaHoc: (state, action) => {
       state.message = action.payload;
-      
     },
   },
 });

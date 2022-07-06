@@ -40,7 +40,7 @@ function RowCourses() {
       <div className="row">
         <div className="row__header">
           <h1>Khóa học nổi bật</h1>
-          <a href="/allcourses" className="more">
+          <a href="/details/allcourses" className="more">
             Xem Thêm <RightOutlined />
           </a>
         </div>

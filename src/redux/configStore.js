@@ -8,11 +8,13 @@ import thunk from "redux-thunk";
 import cartReducer from "./reducers/cartReducer";
 import courseReducer from "./reducers/courseReducer";
 import userReducer from "./reducers/userReducer";
+import adminReducer from "./reducers/adminReducer";
 
 const reducers = combineReducers({
   courseReducer: courseReducer,
   userReducer: userReducer,
   cartReducer: cartReducer,
+  adminReducer: adminReducer,
 });
 const persistConfig = {
   key: "root",
