@@ -34,28 +34,29 @@ function App() {
       <BrowserRouter>
         <Switch>
           {/* Admin*/}
-          <IsAdminRedirect user={user} path="/admin">
+          <IsAdminRedirect exact user={user} path="/admin">
             <AdminTemplate Component={Dashboard} />
           </IsAdminRedirect>
-          <IsAdminRedirect user={user} path="/admin/users">
+          <IsAdminRedirect exact user={user} path="/admin/users">
             <AdminTemplate Component={Dashboard} />
           </IsAdminRedirect>
           <IsAdminRedirect
+            exact
             user={user}
             path="/admin/dashboard/edituser/:taiKhoan"
           >
             <AdminTemplate Component={EditUser} />
           </IsAdminRedirect>
-          <IsAdminRedirect user={user} path="/admin/dashboard/addnewuser">
+          <IsAdminRedirect exact user={user} path="/admin/dashboard/addnewuser">
             <AdminTemplate Component={AddNewUser} />
           </IsAdminRedirect>
-          <IsAdminRedirect user={user} path="/admin/courses">
+          <IsAdminRedirect exact user={user} path="/admin/courses">
             <AdminTemplate Component={Courses} />
           </IsAdminRedirect>
-          <IsAdminRedirect user={user} path="/admin/courses/edit/:id">
+          <IsAdminRedirect exact user={user} path="/admin/courses/edit/:id">
             <AdminTemplate Component={Edit} />
           </IsAdminRedirect>
-          <IsAdminRedirect user={user} path="/admin/courses/addnew">
+          <IsAdminRedirect exact user={user} path="/admin/courses/addnew">
             <AdminTemplate Component={AddNew} />
           </IsAdminRedirect>
           {/* user */}
