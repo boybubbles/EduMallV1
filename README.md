@@ -6,13 +6,13 @@ An Education Platform that help people learning on any device
 
 ## Demo
 
-https://edumall-6b8f0.web.app
+https://edumall-production.web.app/
 
 #
 
 ## Administration Page
 
-https://edumall-6b8f0.web.app/admin
+https://edumall-production.web.app/admin
 
 Here is an username and password under Administration. Feel free to using it.
 
