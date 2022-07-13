@@ -3,7 +3,7 @@
 import { Breadcrumb } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   layDanhSachKhoaHocAction,
   layKhoaHocTheoDanhMucAction,
@@ -11,10 +11,9 @@ import {
 import { CourseSearch } from "../../../../templates/HomeTemplate/layout/Header";
 import CourseCard from "../../../../components/CourseCard";
 function Details() {
-  const history = useHistory();
   const dispatch = useDispatch();
   const { category, keyword } = useParams();
-  const { courseArray, notFound } = useSelector(
+  const { courseArray } = useSelector(
     (rootReducer) => rootReducer.courseReducer
   );
   const listCategory = [

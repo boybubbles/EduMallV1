@@ -70,6 +70,7 @@ export const loadThongTinKhoaHocAction = (maKhoaHoc) => {
 export const xoaKhoaHocAction = (maKhoaHoc) => {
   return async (dispatch) => {
     try {
+      //eslint-disable-next-line
       const result = await quanLyKhoaHocService.xoaKhoaHoc(maKhoaHoc);
       dispatch(layDanhSachKhoaHocAction());
     } catch (errors) {
@@ -80,6 +81,7 @@ export const xoaKhoaHocAction = (maKhoaHoc) => {
 export const themKhoaHocUploadHinhAction = (formData) => {
   return async (dispatch) => {
     try {
+      //eslint-disable-next-line
       let result = await quanLyKhoaHocService.themKhoaHocUploadHinh(formData);
       alert("Thêm Khóa Học Thành Công");
     } catch (errors) {

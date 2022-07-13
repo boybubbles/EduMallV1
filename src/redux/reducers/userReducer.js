@@ -27,10 +27,12 @@ const userReducer = createSlice({
   initialState,
   reducers: {
     DangKy: (state, action) => {
-      if (action.payload.status === 200) {
+      if (action.payload?.status === 200) {
         state.userValue = action.payload;
         state.errorMessage = "";
         state.isSuccessSignUp = true;
+      } else if (action.payload === "reload") {
+        state.isSuccessSignUp = false;
       } else {
         state.errorMessage = action.payload;
         state.isSuccessSignUp = false;

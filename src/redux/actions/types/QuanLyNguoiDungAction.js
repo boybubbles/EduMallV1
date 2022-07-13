@@ -69,6 +69,7 @@ export const layDanhSachNguoiDungAction = (tuKhoa = "") => {
 export const xoaNguoiDungAction = (TaiKhoan) => {
   return async (dispatch) => {
     try {
+      //eslint-disable-next-line
       const result = await quanLyNguoiDungService.xoaNguoiDung(TaiKhoan);
       alert("Xóa thành công người dùng !");
       dispatch(layDanhSachNguoiDungAction());
@@ -96,6 +97,7 @@ export const capNhatThongTinNguoiDungAction = (values) => {
 export const themNguoiDungAction = (values) => {
   return async (dispatch) => {
     try {
+      //eslint-disable-next-line
       let result = await quanLyNguoiDungService.themNguoiDung(values);
       alert("Thêm Thành công");
     } catch (errors) {

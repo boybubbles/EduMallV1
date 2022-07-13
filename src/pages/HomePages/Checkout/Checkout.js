@@ -2,7 +2,6 @@
 
 import { Breadcrumb, Col, Form, Input, Row } from "antd";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Receipt from "../../../components/Receipt";
 

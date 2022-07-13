@@ -1,0 +1,17 @@
+/** @format */
+
+
+.signup {
+  position: relative;
+  font-size: large;
+  transition: all 0.3s ease;
+  color: black;
+  border-radius: 25px;
+  background-color: darkviolet;
+  color: white;
+  font-weight: bold;
+  span {
+    padding: 10px 35px;
+    cursor: pointer;
+  }
+}

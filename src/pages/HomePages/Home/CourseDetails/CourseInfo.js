@@ -1,7 +1,7 @@
 /** @format */
 
 import { Breadcrumb, Col, Rate, Row } from "antd";
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { SmileOutlined, BookOutlined } from "@ant-design/icons";
 import RowCourses from "../../../../components/RowCourses";
 import gsap from "gsap";
@@ -11,7 +11,6 @@ import {
   layThongTinKhoaHocAction,
   loadThongTinKhoaHocAction,
 } from "../../../../redux/actions/types/QuanLyKhoaHocAction";
-import { CheckListContext } from "../../cart/Cart";
 function CourseInfo() {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -22,7 +21,7 @@ function CourseInfo() {
   const { courseInfo } = useSelector(
     (rootReducer) => rootReducer.courseReducer
   );
- 
+
   useEffect(() => {
     window.scroll(0, 0);
     dispatch(loadThongTinKhoaHocAction(courseName));
@@ -88,7 +87,7 @@ function CourseInfo() {
                     }}
                     className="buyNow"
                   >
-                   Xem giỏ hàng
+                    Xem giỏ hàng
                   </button>
                 </div>
               </div>

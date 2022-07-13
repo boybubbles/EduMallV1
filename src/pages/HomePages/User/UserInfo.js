@@ -2,7 +2,7 @@
 
 import { Breadcrumb, Button, message, Space } from "antd";
 import gsap from "gsap";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CourseCard from "../../../components/CourseCard";
 import {

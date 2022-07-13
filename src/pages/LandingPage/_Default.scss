@@ -24,8 +24,7 @@
     .header__buttons {
       @include flex(center, space-around, row);
       gap: 50px;
-      .signin,
-      .signup {
+      .signin {
         position: relative;
         font-size: large;
         transition: all 0.3s ease;
@@ -39,9 +38,100 @@
           cursor: pointer;
         }
       }
-      .signup {
-        background-color: darkviolet;
-        color: white;
+    }
+  }
+  .sign__up__container {
+    &__inner {
+      margin: auto;
+      &__content {
+        height: 100vh;
+        @include flex(center, unset, row);
+
+        &-left {
+          position: relative;
+          flex: 2;
+          .left__inner {
+            position: relative;
+            height: 100vh;
+            gap: 25px;
+            @include flex(center, center, column);
+
+            span {
+              font-size: medium;
+              color: grey;
+            }
+            h1 {
+              margin: 0;
+              font-size: 48px;
+              font-weight: bold;
+            }
+            .wrapper {
+              position: relative;
+              width: 50%;
+              @include flex(center, unset, column);
+              input {
+                padding: 20px 35px;
+                border-radius: 35px;
+                border: none;
+                outline: none;
+                line-height: 1.5;
+                color: #111111;
+                font-size: 25px;
+                background-color: antiquewhite;
+              }
+              span {
+                color: red;
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+              }
+              button {
+                font-size: large;
+                transition: all 0.3s ease;
+                border-radius: 25px;
+                cursor: pointer;
+                font-weight: bold;
+                background-color: darkviolet;
+                color: white;
+                border: none;
+                padding: 10px 35px;
+                &:disabled {
+                  background-color: grayscale($color: #000000);
+                  color: gray;
+                }
+              }
+            }
+          }
+          .success__text {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translate(-25%, -50%) scale(0);
+            color: black;
+            font-weight: bold;
+            @include flex(unset, unset, column);
+            gap: 15px;
+            .signin {
+              border-radius: 35px;
+              padding: 10px 35px;
+              background-color: darkorchid;
+              cursor: pointer;
+            }
+          }
+          .left__inner__success {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+        }
+        &-right {
+          flex: 1;
+          video {
+            clip-path: circle(40%);
+          }
+        }
       }
     }
   }
@@ -168,111 +258,6 @@
     }
   }
 
-  .sign__up__container {
-    &__inner {
-      margin: auto;
-      &__content {
-        height: 100vh;
-        @include flex(center, unset, row);
-
-        &-left {
-          flex: 2;
-          .left__inner {
-            position: relative;
-            height: 100vh;
-            gap: 25px;
-            @include flex(center, center, column);
-
-            span {
-              font-size: medium;
-              color: grey;
-            }
-            h1 {
-              margin: 0;
-              font-size: 48px;
-              font-weight: bold;
-            }
-            .wrapper {
-              position: relative;
-              width: 50%;
-              @include flex(center, unset, column);
-              input {
-                padding: 20px 35px;
-                border-radius: 35px;
-                border: none;
-                outline: none;
-                line-height: 1.5;
-                color: #111111;
-                font-size: 25px;
-                background-color: antiquewhite;
-              }
-              span {
-                color: red;
-                position: absolute;
-                top: 100%;
-                left: 50%;
-                transform: translateX(-50%);
-              }
-              button {
-                font-size: large;
-                transition: all 0.3s ease;
-                border-radius: 25px;
-                cursor: pointer;
-                font-weight: bold;
-                background-color: darkviolet;
-                color: white;
-                border: none;
-                padding: 10px 35px;
-                &:disabled {
-                  background-color: grayscale($color: #000000);
-                  color: gray;
-                }
-              }
-            }
-          }
-        }
-        &-right {
-          flex: 1;
-          video {
-            clip-path: circle(40%);
-          }
-        }
-      }
-    }
-  }
-  .sign__in__container {
-    position: absolute;
-    top: 263%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: darkviolet;
-    border-radius: 35px;
-    padding: 35px;
-    &__inner {
-      @include flex(center, center, column);
-      i {
-        font-size: 10px;
-        color: white;
-      }
-      .anticon-right-circle {
-        padding: 0px !important;
-        font-size: 35px;
-        color: white;
-      }
-      &__content {
-        @include flex(center, center, column);
-        gap: 15px;
-        input {
-          border: none;
-          border-radius: 35px;
-          background-color: #fafafa;
-          line-height: 1.5;
-          padding: 15px 25px;
-          outline: none;
-        }
-      }
-    }
-  }
   @media (min-width: 360px) {
     &__hero {
       padding: 0px;

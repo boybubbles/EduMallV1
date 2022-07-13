@@ -1,8 +1,6 @@
 /** @format */
 
-import { Route } from "react-router";
 import React from "react";
-import _ from "lodash";
 
 import { DesktopOutlined, FileOutlined, UserOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
@@ -12,7 +10,7 @@ const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 
 const AdminTemplate = (props) => {
-  const { Component, ...restProps } = props;
+  const { Component } = props;
   // const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer);
 
   const [collapsed, setCollapsed] = useState(false);
@@ -23,16 +21,7 @@ const AdminTemplate = (props) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   });
-  // if (!localStorage.getItem(USER_LOGIN)) {
-  //   alert('Bạn không có quyền truy cập vào trang này !')
-  //   return <Redirect to='/' />
-  // }
-
-  // if (userLogin.maLoaiNguoiDung !== 'QuanTri') {
-  //   alert('Bạn không có quyền truy cập vào trang này !')
-  //   return <Redirect to='/' />
-
-  // }
+  
   const operations = (
     <Fragment>
       {/* {!_.isEmpty(userLogin) ? <Fragment> <button onClick={() => {
