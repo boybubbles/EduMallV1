@@ -110,7 +110,7 @@ export default function Dashboard(props) {
       <Button
         className="mb-3"
         onClick={() => {
-          props.history.push("/admin/dashboard/addnewuser");
+          history.push("/admin/dashboard/addnewuser");
         }}
       >
         Thêm người dùng
