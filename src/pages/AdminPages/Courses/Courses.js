@@ -6,7 +6,7 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import {
   layDanhSachKhoaHocAction,
   xoaKhoaHocAction,
@@ -17,8 +17,9 @@ export default function Courses(props) {
   const { courseArray } = useSelector(
     (rootReducer) => rootReducer.courseReducer
   );
-
+  const history = useHistory();
   const dispatch = useDispatch();
+ 
   useEffect(() => {
     dispatch(layDanhSachKhoaHocAction());
   }, []);
