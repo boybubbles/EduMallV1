@@ -148,7 +148,7 @@ export default function Courses(props) {
       <Button
         className="mb-3"
         onClick={() => {
-          props.history.push("/admin/courses/addnew");
+          history.push("/admin/courses/addnew");
         }}
       >
         Thêm khóa học
