@@ -28,11 +28,9 @@ export class QuanLyKhoaHocService extends baseService {
     return this.delete(`/api/QuanLyKhoaHoc/XoaKhoaHoc?MaKhoaHoc=${maKhoaHoc}`);
   };
   themKhoaHocUploadHinh = (formData) => {
-    console.log("call API");
     return this.post("api/QuanLyKhoaHoc/ThemKhoaHocUploadHinh", formData);
   };
   capNhatKhoaHocUpload = (formData) => {
-    console.log("call API");
     return this.post("api/QuanLyKhoaHoc/CapNhatKhoaHocUpload", formData);
   };
 }

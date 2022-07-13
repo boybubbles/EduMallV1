@@ -51,8 +51,6 @@ const userReducer = createSlice({
     },
 
     capNhatThongTin: (state, action) => {
-      console.log("payload", action.payload);
-      console.log("userValue", state.userValue);
       if (action.payload.status === 200) {
         state.userValue = { ...state.userValue, ...action.payload };
         localStorage.setItem(USER_LOGIN, JSON.stringify(action.payload));

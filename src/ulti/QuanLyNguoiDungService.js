@@ -31,7 +31,6 @@ export class QuanLyNguoiDungService extends baseService {
     );
   };
   timKiemNguoiDung = (tuKhoa) => {
-    console.log("từ khóa", tuKhoa);
     return this.get(
       `/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${GROUPID}&tuKhoa=${tuKhoa}`
     );

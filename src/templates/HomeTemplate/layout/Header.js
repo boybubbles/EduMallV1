@@ -33,20 +33,21 @@ function Header() {
       window.removeEventListener("scroll", onScroll);
     };
   }, [offset]);
+
   const items = [
     {
-      label: "Trang Chủ",
-      key: "/home",
-    },
-    {
-      label: "Khóa học của tôi",
-      key: "/home/user",
-    },
-    {
       icon: <UnorderedListOutlined />,
-      label: "Danh Mục",
+      label: "Menu",
       key: "SubMenu",
       children: [
+        {
+          label: "Trang Chủ",
+          key: "/home",
+        },
+        {
+          label: "Khóa học của tôi",
+          key: "/home/user",
+        },
         {
           label: "FrontEnd",
           icon: <CodepenOutlined />,
@@ -129,7 +130,7 @@ export const CourseSearch = (props) => {
       value={valueSearch}
       type="text"
       className="search__input"
-      placeholder="Tìm kiếm khóa học"
+      placeholder="Tìm kiếm tên khóa học"
       onChange={(e) => {
         setValueSearch(e.target.value);
       }}
@@ -194,13 +195,9 @@ export function ModalUser() {
 
           <button
             onClick={() => {
-              console.log("first");
               localStorage.removeItem(USER_LOGIN);
-              console.log("second");
               localStorage.removeItem(AccessToken);
-              console.log("third");
               dispatch(dangXuat());
-              console.log("go");
               history.go("/");
             }}
           >

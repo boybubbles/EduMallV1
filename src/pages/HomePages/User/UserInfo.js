@@ -83,7 +83,6 @@ const Panel1 = ({ userValue, successMessage }) => {
     maNhom: userValue.maNhom,
     email: userValue.email,
   });
-  console.log(valueEdit);
   useEffect(() => {
     gsap.from(".pannel1", {
       x: "-100%",

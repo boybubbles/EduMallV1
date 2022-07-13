@@ -19,7 +19,7 @@ export default function Courses(props) {
   );
   const history = useHistory();
   const dispatch = useDispatch();
- 
+
   useEffect(() => {
     dispatch(layDanhSachKhoaHocAction());
   }, []);
@@ -131,7 +131,7 @@ export default function Courses(props) {
   ];
 
   const data = courseArray;
-
+  const dataWithId = data.map((item, index) => ({ ...item, key: index }));
   const onSearch = (value) => {
     console.log(value);
 
@@ -155,12 +155,7 @@ export default function Courses(props) {
         Thêm khóa học
       </Button>
       <Search placeholder=" Tìm kiếm" size="large" onSearch={onSearch} />
-      <Table
-        columns={columns}
-        dataSource={data}
-        onChange={onChange}
-        rowKey={"maKhoaHoc"}
-      />
+      <Table columns={columns} dataSource={dataWithId} onChange={onChange} />
     </div>
   );
 }

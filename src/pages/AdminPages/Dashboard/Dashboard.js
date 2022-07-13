@@ -25,6 +25,7 @@ export default function Dashboard(props) {
 
   const columns = [
     {
+      key: "taiKhoan",
       title: "Tài khoản",
       dataIndex: "taiKhoan",
       value: (text, object) => {
@@ -35,6 +36,7 @@ export default function Dashboard(props) {
       sortDirections: ["descend"],
     },
     {
+      key: "hoTen",
       title: "Họ tên",
       dataIndex: "hoTen",
       value: (text, object) => {
@@ -45,6 +47,7 @@ export default function Dashboard(props) {
       sortDirections: ["descend"],
     },
     {
+      key: "email",
       title: "Email",
       dataIndex: "email",
       value: (text, object) => {
@@ -52,6 +55,7 @@ export default function Dashboard(props) {
       },
     },
     {
+      key: "sdt",
       title: "Số điện thoại",
       dataIndex: "soDt",
       value: (text, object) => {
@@ -59,6 +63,7 @@ export default function Dashboard(props) {
       },
     },
     {
+      key: "maLoaiNguoiDung",
       title: "Mã loại người dùng",
       dataIndex: "maLoaiNguoiDung",
       value: (text, object) => {
@@ -66,6 +71,7 @@ export default function Dashboard(props) {
       },
     },
     {
+      key: "hanhDong",
       title: "Hành động",
       dataIndex: "hanhDong",
       render: (text, user) => {
@@ -97,13 +103,11 @@ export default function Dashboard(props) {
     },
   ];
   const data = arrUser;
-
+  const dataWithId = data.map((item, index) => ({ ...item, key: index }));
   const onSearch = (value) => {
     dispatch(layDanhSachNguoiDungAction(value));
   };
-  const onChange = (pagination, filters, sorter, extra) => {
-    console.log("params", pagination, filters, sorter, extra);
-  };
+
   return (
     <div>
       <h3 className="text 4-xl">Quản lý người dùng</h3>
@@ -116,7 +120,7 @@ export default function Dashboard(props) {
         Thêm người dùng
       </Button>
       <Search placeholder="Tìm kiếm" size="large" onSearch={onSearch} />
-      <Table columns={columns} dataSource={data} onChange={onChange} />
+      <Table columns={columns} dataSource={dataWithId} />
     </div>
   );
 }

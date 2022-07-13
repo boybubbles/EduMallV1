@@ -37,7 +37,7 @@ function RowCourses() {
   };
   return (
     <>
-      <div className="row">
+      <div className="rowCourses-wrapper">
         <div className="row__header">
           <h1>Khóa học nổi bật</h1>
           <a href="/details/allcourses" className="more">

@@ -1,12 +1,25 @@
+<!-- @format -->
+
 # EduMall
 
 An Education Platform that help people learning on any device
 
 ## Demo
 
-http://edumall-6b8f0.web.app/home
+http://edumall-6b8f0.web.app
 
 #
+
+## Administration Page
+
+http://edumall-6b8f0.web.app/admin
+
+Here is an username and password under Administration. Feel free to using it.
+
+`AdminProduction`
+
+#
+
 ## Tech Stack
 
 **Client:** ReactJS, Redux-ToolKit, Style-Component, AntDesign,...

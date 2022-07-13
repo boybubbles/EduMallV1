@@ -17,7 +17,6 @@ export const layKhoaHocTheoDanhMucAction = (danhMucKhoaHoc) => {
       );
       dispatch(layDanhSachKhoaHocTheoDanhMuc(result.data));
     } catch (error) {
-      console.log(error);
       dispatch(
         layDanhSachKhoaHocTheoDanhMuc({
           ...error.response.data,
@@ -73,14 +72,12 @@ export const xoaKhoaHocAction = (maKhoaHoc) => {
     try {
       const result = await quanLyKhoaHocService.xoaKhoaHoc(maKhoaHoc);
       dispatch(layDanhSachKhoaHocAction());
-      console.log(`xóa thành công ${maKhoaHoc}`);
     } catch (errors) {
       alert(`${errors.response.data}`);
     }
   };
 };
 export const themKhoaHocUploadHinhAction = (formData) => {
-  console.log("themKhoaHocUploadHinhAction");
   return async (dispatch) => {
     try {
       let result = await quanLyKhoaHocService.themKhoaHocUploadHinh(formData);

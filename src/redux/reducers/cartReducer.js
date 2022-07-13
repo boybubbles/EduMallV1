@@ -22,7 +22,6 @@ const cartReducer = createSlice({
       }
     },
     xoaSanPham: (state, action) => {
-      console.log(action);
       if (action.payload?.taiKhoan) {
         state.thongTinGioHang = state.thongTinGioHang.filter((item) => {
           return item.maKhoaHoc !== action.payload.maKhoaHoc;

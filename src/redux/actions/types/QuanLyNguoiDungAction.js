@@ -52,11 +52,6 @@ export const CapNhatThongTinAction = (valueEdit) => {
       dispatch(capNhatThongTin({ ...result.data, status: result.status }));
     } catch (error) {
       console.log(error);
-      // dispatch(
-      //   capNhatThongTin({
-      //     ...error.response.status,
-      //   })
-      // );
     }
   };
 };
@@ -93,7 +88,6 @@ export const capNhatThongTinNguoiDungAction = (values) => {
         capNhatThongTinNguoiDung({ ...result.data, status: result.status })
       );
     } catch (errors) {
-      console.log(errors);
       dispatch(capNhatThongTinNguoiDung(errors.response.data));
     }
   };
@@ -103,7 +97,6 @@ export const themNguoiDungAction = (values) => {
   return async (dispatch) => {
     try {
       let result = await quanLyNguoiDungService.themNguoiDung(values);
-      console.log(result);
       alert("Thêm Thành công");
     } catch (errors) {
       alert(errors.response.data);
