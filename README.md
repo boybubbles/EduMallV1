@@ -18,6 +18,8 @@ Here is an username and password under Administration. Feel free to using it.
 
 `AdminProduction`
 
+Please note that Administration page will not required login credential, you only can navigate to route `/admin` once accout is allowed.
+
 #
 
 ## Tech Stack
