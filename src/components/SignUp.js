@@ -67,7 +67,6 @@ const SignUp = () => {
           duration: 0.3,
         }
       )
-
         .to(".success__text", {
           duration: 0.3,
           scale: 2,
